@@ -1,5 +1,5 @@
-#include <thread>
 #include <iostream>
+#include <boost/thread.hpp>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <boost/program_options.hpp>
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
                 std::cout << "------------------------------------------\n";
                 udp_client client(vm["address"].as<std::string>(), vm["port"].as<int>());
                 client.setEndpoint(vm["server-address"].as<std::string>(), vm["server-port"].as<int>());
-                std::thread r([&] { client.Receiver(); });
+                boost::thread r([&] { client.Receiver(); });
 
                 std::string in;
                 while (in != "quit") {
