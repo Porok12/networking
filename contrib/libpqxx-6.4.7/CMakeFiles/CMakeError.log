@@ -1,0 +1,104 @@
+Performing C++ SOURCE FILE Test PQXX_HAVE_OPTIONAL failed with the following output:
+Change Dir: /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_99865/fast"
+/usr/bin/make -f CMakeFiles/cmTC_99865.dir/build.make CMakeFiles/cmTC_99865.dir/build
+make[1]: Entering directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_99865.dir/src.cxx.o
+/usr/bin/c++    -DPQXX_HAVE_OPTIONAL   -std=c++11 -o CMakeFiles/cmTC_99865.dir/src.cxx.o -c /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:21: error: ‘optional’ is not a member of ‘std’
+   int main() { std::optional<int> o; }
+                     ^~~~~~~~
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:30: error: expected primary-expression before ‘int’
+   int main() { std::optional<int> o; }
+                              ^~~
+CMakeFiles/cmTC_99865.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_99865.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_99865.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_99865/fast' failed
+make: *** [cmTC_99865/fast] Error 2
+
+Source file was:
+
+  #include <optional>
+  int main() { std::optional<int> o; }
+
+Performing C++ SOURCE FILE Test PQXX_HAVE_EXP_OPTIONAL failed with the following output:
+Change Dir: /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_aafdb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_aafdb.dir/build.make CMakeFiles/cmTC_aafdb.dir/build
+make[1]: Entering directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_aafdb.dir/src.cxx.o
+/usr/bin/c++    -DPQXX_HAVE_EXP_OPTIONAL   -std=c++11 -o CMakeFiles/cmTC_aafdb.dir/src.cxx.o -c /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:21: error: ‘std::experimental’ has not been declared
+   int main() { std::experimental::optional<int> o; }
+                     ^~~~~~~~~~~~
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:44: error: expected primary-expression before ‘int’
+   int main() { std::experimental::optional<int> o; }
+                                            ^~~
+CMakeFiles/cmTC_aafdb.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_aafdb.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_aafdb.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_aafdb/fast' failed
+make: *** [cmTC_aafdb/fast] Error 2
+
+Source file was:
+
+  #include <experimental/optional>
+  int main() { std::experimental::optional<int> o; }
+
+Performing C++ SOURCE FILE Test PQXX_HAVE_OPTIONAL failed with the following output:
+Change Dir: /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_24a74/fast"
+/usr/bin/make -f CMakeFiles/cmTC_24a74.dir/build.make CMakeFiles/cmTC_24a74.dir/build
+make[1]: Entering directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_24a74.dir/src.cxx.o
+/usr/bin/c++    -DPQXX_HAVE_OPTIONAL   -std=c++11 -o CMakeFiles/cmTC_24a74.dir/src.cxx.o -c /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:21: error: ‘optional’ is not a member of ‘std’
+   int main() { std::optional<int> o; }
+                     ^~~~~~~~
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:30: error: expected primary-expression before ‘int’
+   int main() { std::optional<int> o; }
+                              ^~~
+CMakeFiles/cmTC_24a74.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_24a74.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_24a74.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_24a74/fast' failed
+make: *** [cmTC_24a74/fast] Error 2
+
+Source file was:
+
+  #include <optional>
+  int main() { std::optional<int> o; }
+
+Performing C++ SOURCE FILE Test PQXX_HAVE_EXP_OPTIONAL failed with the following output:
+Change Dir: /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ac9a3/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ac9a3.dir/build.make CMakeFiles/cmTC_ac9a3.dir/build
+make[1]: Entering directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ac9a3.dir/src.cxx.o
+/usr/bin/c++    -DPQXX_HAVE_EXP_OPTIONAL   -std=c++11 -o CMakeFiles/cmTC_ac9a3.dir/src.cxx.o -c /home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:21: error: ‘std::experimental’ has not been declared
+   int main() { std::experimental::optional<int> o; }
+                     ^~~~~~~~~~~~
+/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp/src.cxx:3:44: error: expected primary-expression before ‘int’
+   int main() { std::experimental::optional<int> o; }
+                                            ^~~
+CMakeFiles/cmTC_ac9a3.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_ac9a3.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_ac9a3.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/przemek/Downloads/libpqxx-6.4.7/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_ac9a3/fast' failed
+make: *** [cmTC_ac9a3/fast] Error 2
+
+Source file was:
+
+  #include <experimental/optional>
+  int main() { std::experimental::optional<int> o; }
+
