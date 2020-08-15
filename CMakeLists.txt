@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(Boost_USE_STATIC_LIBS   OFF)
-find_package(Boost COMPONENTS program_options system REQUIRED)
+find_package(Boost COMPONENTS program_options serialization system REQUIRED)
 #find_package(Poco REQUIRED COMPONENTS Foundation Net Zip)
 
 include_directories(${Boost_INCLUDE_DIR})

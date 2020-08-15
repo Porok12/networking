@@ -8,9 +8,31 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/string.hpp>
 
 using boost::asio::ip::udp;
 using boost::asio::ip::address;
+
+enum MessageType {
+    MESSAGE = 0x01
+};
+
+struct example {
+    int id;
+    MessageType type;
+    std::string value;
+
+private:
+    friend class boost::serialization::access;
+
+    template <typename archive>
+    void serialize(archive& ar, const unsigned /*version*/) {
+        ar & id;
+        ar & type;
+        ar & value;
+    }
+};
 
 class udp_server {
 public:

@@ -1,7 +1,7 @@
 #include "udp_server.h"
 
 std::string make_daytime_string() {
-    using namespace std; // For time_t, time and ctime;
+    using namespace std;
     time_t now = time(0);
     return ctime(&now);
 }
@@ -22,9 +22,12 @@ void udp_server::start_receive() {
 }
 
 void udp_server::handle_receive(const boost::system::error_code &error, std::size_t bytes_transferred) {
-    std::cout << "Received: '";
-    std::cout.write(recv_buffer_.data(), bytes_transferred);
-    std::cout << "' (" << error.message() << ")" << std::endl;
+    std::istringstream archive_stream(recv_buffer_.data());
+    example mystruct;
+    boost::archive::text_iarchive archive(archive_stream);
+    archive >> mystruct;
+
+    std::cout << "(" << remote_endpoint_.address().to_string() << ") [" << mystruct.type << "] " << mystruct.id << ": " << mystruct.value << std::endl;
 
     if (!error || error == boost::asio::error::message_size) {
         boost::shared_ptr<std::string> message(new std::string(make_daytime_string()));
