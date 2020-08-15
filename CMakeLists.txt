@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(Boost_USE_STATIC_LIBS   OFF)
-find_package(Boost COMPONENTS program_options thread system REQUIRED)
+find_package(Boost COMPONENTS program_options thread serialization system REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
 

@@ -19,9 +19,10 @@ void udp_client::handle_receive(const boost::system::error_code &error, size_t b
 }
 
 void udp_client::wait() {
-    socket.async_receive_from(boost::asio::buffer(recv_buffer),
-                              remote_endpoint,
-                              boost::bind(&udp_client::handle_receive, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
+    socket.async_receive_from(boost::asio::buffer(recv_buffer), remote_endpoint,
+                              boost::bind(&udp_client::handle_receive, this,
+                                          boost::asio::placeholders::error,
+                                          boost::asio::placeholders::bytes_transferred));
 }
 
 void udp_client::Receiver() {
@@ -34,10 +35,17 @@ void udp_client::Receiver() {
 }
 
 void udp_client::send(std::string in) {
-//    udp::endpoint remote_endpoint = udp::endpoint(address::from_string(SERVER_ADDRESS), SERVER_PORT);
     boost::system::error_code err;
-    auto sent = socket.send_to(boost::asio::buffer(in), remote_endpoint, 0, err);
-    std::cout << "Send: '" << in << "' (" << err.message() << ")" << std::endl;
+
+    example mystruct;
+    mystruct.id = 1;
+    mystruct.type = MessageType::MESSAGE;
+    mystruct.value = in;
+    std::ostringstream archive_stream;
+    boost::archive::text_oarchive archive(archive_stream);
+    archive << mystruct;
+
+    socket.send_to( boost::asio::buffer(archive_stream.str()), remote_endpoint, 0, err);
 }
 
 void udp_client::setEndpoint(std::string address, int port) {
