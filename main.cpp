@@ -2,11 +2,32 @@
 #include <boost/asio.hpp>
 #include <boost/program_options.hpp>
 #include "udp_server.h"
+#include <pqxx/pqxx>
 
 using boost::asio::ip::udp;
 namespace po = boost::program_options;
 
+void db_test() {
+    try {
+        pqxx::connection C("postgresql://guest:ataga@localhost/networking");
+        std::cout << "Connected to " << C.dbname() << std::endl;
+        pqxx::work W{C};
+
+        pqxx::result R{W.exec("SELECT username FROM users")};
+
+        std::cout << "Found " << R.size() << " users:\n";
+        for (auto row: R) {
+            std::cout << " -- " << row[0].c_str() << '\n';
+        }
+
+    } catch (std::exception const &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
 int main(int argc, char* argv[]) {
+    db_test();
+
     try {
         po::options_description desc("Allowed options");
         desc.add_options()

@@ -7,12 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(Boost_USE_STATIC_LIBS   OFF)
 find_package(Boost COMPONENTS program_options serialization system REQUIRED)
 #find_package(Poco REQUIRED COMPONENTS Foundation Net Zip)
+find_package(libpqxx REQUIRED PATHS ${CMAKE_SOURCE_DIR}/contrib/libpqxx-6.4.7)
 
 include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(Server main.cpp udp_server.cpp udp_server.h)
 
-target_link_libraries(Server ${Boost_LIBRARIES})
+target_link_libraries(Server ${Boost_LIBRARIES} libpqxx::pqxx_shared)
 
 ## set the POCO paths and libs
 #set(POCO_PREFIX      "/home/przemek/poco/poco/cmake-build/") # the directory containing "include" and "lib"
