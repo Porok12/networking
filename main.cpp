@@ -3,14 +3,50 @@
 #include <boost/program_options.hpp>
 #include "udp_server.h"
 #include <pqxx/pqxx>
+#include <nlohmann/json.hpp>
+#include <fstream>
 
 using boost::asio::ip::udp;
 namespace po = boost::program_options;
+using json = nlohmann::json;
+
+namespace ns {
+    struct server_settings {
+        std::string ip;
+        int port;
+        std::string name;
+        int max_users;
+//        bool database;
+    };
+
+    void to_json(json& j, const server_settings& ss) {
+        j = json{{"ip", ss.ip}, {"port", ss.port}, {"name", ss.name}, {"max_users", ss.max_users}, /*{"database", ss.database}*/};
+    }
+
+    void from_json(const json& j, server_settings& ss) {
+        try {
+            j.at("ip").get_to(ss.ip);
+            j.at("port").get_to(ss.port);
+            j.at("name").get_to(ss.name);
+            j.at("max_users").get_to(ss.max_users);
+//            j.at("database").get_to(ss.database);
+
+        } catch (const json::out_of_range &e) {
+            std::cerr << e.id << ": " << e.what() << std::endl;
+        }
+    }
+}
 
 void db_test() {
     try {
         pqxx::connection C("postgresql://guest:ataga@localhost/networking");
-        std::cout << "Connected to " << C.dbname() << std::endl;
+
+        if (C.is_open()) {
+            std::cout << "Connected to " << C.dbname() << std::endl;
+        } else {
+            return;
+        }
+
         pqxx::work W{C};
 
         pqxx::result R{W.exec("SELECT username FROM users")};
@@ -20,12 +56,29 @@ void db_test() {
             std::cout << " -- " << row[0].c_str() << '\n';
         }
 
+        C.disconnect ();
     } catch (std::exception const &e) {
         std::cerr << e.what() << '\n';
     }
 }
 
+void json_test() {
+    std::ifstream i("config.json");
+    json j;
+    i >> j;
+    i.close();
+
+    std::cout << j << std::endl;
+
+    std::cout << "ip: " << j["ip"] << std::endl;
+
+    auto p2 = j.get<ns::server_settings>();
+
+    std::cout << p2.name << std::endl;
+}
+
 int main(int argc, char* argv[]) {
+    json_test();
     db_test();
 
     try {
