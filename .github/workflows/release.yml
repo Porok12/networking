@@ -3,7 +3,7 @@ name: Server release
 
 on:
   push:
-    branches: [ server ]
+    #branches: [ server ]
     tags:
       - 'v*'
 
