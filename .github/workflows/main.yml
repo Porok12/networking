@@ -7,7 +7,7 @@ on:
     branches: [ server ]
     
 jobs:
-  build:
+  build-ubuntu:
     
     runs-on: ubuntu-latest
     
@@ -50,3 +50,11 @@ jobs:
     # run tests
     - name: run tests
       run: build/test/Test
+  
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: test
+        run: echo "test"
+
+    
