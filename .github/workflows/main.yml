@@ -36,13 +36,6 @@ jobs:
         done
     - name: postgresql
       run: sudo apt-get install --yes --quiet libpq-dev postgresql-server-dev-all # postgresql  
-#     # build project
-#     - name: mkdir
-#       run: mkdir build
-#     - name: cmake build
-#       run: cmake -Bbuild -H.
-#     - name: cmake make
-#       run: cmake --build build/ --target all
     # build project
     - name: mkdir
       run: mkdir build
