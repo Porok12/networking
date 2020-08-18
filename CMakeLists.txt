@@ -20,7 +20,7 @@ set_target_properties(libpqxx PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/c
 #message(${log4cplus})
 include_directories(${CMAKE_SOURCE_DIR}/contrib/log4cplus/include)
 add_library(log4cplus SHARED IMPORTED)
-set_target_properties(log4cplus PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/contrib/log4cplus/libpqxx.so)
+set_target_properties(log4cplus PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/contrib/log4cplus/log4cplus.so)
 
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes)
