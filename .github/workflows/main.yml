@@ -26,7 +26,7 @@ jobs:
       env:
         CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
       run: |
-        if [[ "$CACHE_HIT" != 'true' ]]; then
+        if [[ "$CACHE_HIT" == 'true' ]]; then
           echo ">>>"
           sudo cp --force --recursive ~/boost/* /
           echo "<<<"
