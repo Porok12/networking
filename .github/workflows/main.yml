@@ -26,15 +26,15 @@ jobs:
       env:
         CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
       run: |
-        #if [[ "$CACHE_HIT" == 'true' ]]; then
-        #  sudo cp --force --recursive ~/boost/* /
-        #else
+        if [[ "$CACHE_HIT" == 'true' ]]; then
+          sudo cp --force --recursive ~/boost/* /
+        else
           sudo apt-get update && sudo apt-get install -yq libboost-all-dev
           mkdir -p ~/boost
           for dep in libboost-dev; do
             dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
           done
-        #fi
+        fi
     - name: postgresql
       run: sudo apt-get install --yes --quiet libpq-dev postgresql-server-dev-all # postgresql  
 #     # build project
