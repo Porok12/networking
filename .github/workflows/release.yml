@@ -1,9 +1,9 @@
 
-name: Create Release
+name: Client release
 
 on:
   push:
-    branches: [ server ]
+    branches: [ client ]
     tags:
       - 'v*'
 
