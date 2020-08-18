@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
 
+add_subdirectory(test)
+
 set(Boost_USE_STATIC_LIBS   OFF)
 find_package(Boost COMPONENTS program_options serialization system REQUIRED)
 #find_package(libpqxx REQUIRED)
