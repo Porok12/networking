@@ -9,6 +9,7 @@
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>
 #include <log4cplus/initializer.h>
+#include <cli11/CLI11.hpp>
 
 
 using boost::asio::ip::udp;
@@ -97,6 +98,22 @@ int main(int argc, char* argv[]) {
     logger_test();
     json_test();
     db_test();
+
+    CLI::App app {"description"};
+
+    // Define options
+    int p = 0;
+    app.add_option("-p,--port", p, "Port");
+    app.allow_extras(true);
+
+//    std::string req_real_file;
+//    app.add_option("-f,--file", file, "Require an existing file")
+//            ->required()
+//            ->check(CLI::ExistingFile);
+
+    CLI11_PARSE(app, argc, argv);
+
+    std::cout << "Port value: " << p << std::endl;
 
     try {
         po::options_description desc("Allowed options");

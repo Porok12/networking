@@ -18,9 +18,11 @@ set_target_properties(log4cplus PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}
 
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes)
+include_directories(${CMAKE_SOURCE_DIR}/contrib/cli11/include)
 
 set(NLOHMANN_HEADER ${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes/nlohmann/json.hpp)
-add_executable(Server ${FILES} ${NLOHMANN_HEADER})
+set(CLI11_HEADER ${CMAKE_SOURCE_DIR}/contrib/cli11/include/cli11/CLI11.hpp)
+add_executable(Server ${FILES} ${NLOHMANN_HEADER} ${CLI11_HEADER})
 
 target_link_libraries(Server ${Boost_LIBRARIES} libpqxx log4cplus)
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
