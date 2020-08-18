@@ -79,7 +79,7 @@ void db_test() {
 }
 
 void json_test() {
-    std::ifstream i("config.json");
+    std::ifstream i("../config.json");
     json j;
     i >> j;
     i.close();
