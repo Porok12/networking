@@ -5,10 +5,25 @@
 #include <pqxx/pqxx>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <log4cplus/log4cplus.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/configurator.h>
+#include <log4cplus/initializer.h>
 
 using boost::asio::ip::udp;
 namespace po = boost::program_options;
 using json = nlohmann::json;
+
+void logger_test() {
+    log4cplus::Initializer initializer;
+
+    log4cplus::BasicConfigurator config;
+    config.configure();
+
+    log4cplus::Logger logger = log4cplus::Logger::getInstance(
+            LOG4CPLUS_TEXT("main"));
+    LOG4CPLUS_WARN(logger, LOG4CPLUS_TEXT("Hello, World!"));
+}
 
 namespace ns {
     struct server_settings {
@@ -78,6 +93,7 @@ void json_test() {
 }
 
 int main(int argc, char* argv[]) {
+    logger_test();
     json_test();
     db_test();
 

@@ -16,11 +16,14 @@ include_directories(${CMAKE_SOURCE_DIR}/contrib/libpqxx-6.4.7/include)
 add_library(libpqxx SHARED IMPORTED)
 set_target_properties(libpqxx PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/contrib/libpqxx-6.4.7/libpqxx.so)
 
+find_library(log4cplus log4cplus REQUIRED)
+message(${log4cplus})
+
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes)
 
 set(NLOHMANN_HEADER ${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes/nlohmann/json.hpp)
 add_executable(Server main.cpp udp_server.cpp udp_server.h ${NLOHMANN_HEADER})
 
-target_link_libraries(Server ${Boost_LIBRARIES} libpqxx)
+target_link_libraries(Server ${Boost_LIBRARIES} libpqxx ${log4cplus})
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
