@@ -17,5 +17,5 @@ include_directories(${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes)
 set(NLOHMANN_HEADER ${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes/nlohmann/json.hpp)
 add_executable(Server main.cpp udp_server.cpp udp_server.h ${NLOHMANN_HEADER})
 
-target_link_libraries(Server ${Boost_LIBRARIES} libpqxx::pqxx_static pq)
+target_link_libraries(Server ${Boost_LIBRARIES} libpqxx::pqxx_shared pq)
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
