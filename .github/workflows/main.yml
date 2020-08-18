@@ -21,17 +21,19 @@ jobs:
       id: cache-boost
       with:
         path: "~/boost"
-        key: libboost-dev
+        key: libboost
     - name: Install boost
       env:
         CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
       run: |
-        if [[ "$CACHE_HIT" == 'true' ]]; then
+        if [[ "$CACHE_HIT" != 'true' ]]; then
+          echo ">>>"
           sudo cp --force --recursive ~/boost/* /
+          echo "<<<"
         else
-          sudo apt-get update && sudo apt-get install -yq libboost-all-dev
+          sudo apt-get update && sudo apt-get install --yes libboost-all-dev
           mkdir -p ~/boost
-          for dep in libboost-dev; do
+          for dep in libboost; do
             dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
           done
         fi
