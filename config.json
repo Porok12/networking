@@ -1,0 +1,6 @@
+{
+  "ip": "localhost",
+  "port": 1031,
+  "name": "Server name",
+  "max_users": 10
+}
