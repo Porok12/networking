@@ -17,7 +17,7 @@ jobs:
     - name: update
       run: sudo apt-get update
     - name: boost
-      run: sudo apt-get install -y libboost-program-options libboost-serialization libboost-system
+      run: sudo apt-get install -y libboost-program-options-dev libboost-serialization-dev libboost-system-dev
 #     - name: Cache boost
 #       uses: actions/cache@v2
 #       id: cache-boost
