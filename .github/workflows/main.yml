@@ -14,8 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # install dependencies
+    - name: update
+      run: sudo apt-get update
     - name: boost
-      run: sudo apt-get update && sudo apt-get install --yes --quiet libboost-all-dev
+      run: sudo apt-get install --yes --quiet libboost-all-dev
+    - name: postgresql
+      run: sudo apt-get install --yes --quiet install postgresql  
     # build project
     - name: mkdir
       run: mkdir build
