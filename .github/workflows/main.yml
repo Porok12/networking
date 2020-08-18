@@ -19,7 +19,7 @@ jobs:
     - name: boost
       run: sudo apt-get install --yes --quiet libboost-all-dev
     - name: postgresql
-      run: sudo apt-get install --yes --quiet install postgresql  
+      run: sudo apt-get install --yes --quiet postgresql  
     # build project
     - name: mkdir
       run: mkdir build
