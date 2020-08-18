@@ -22,6 +22,7 @@ include_directories(${CMAKE_SOURCE_DIR}/contrib/cli11/include)
 
 set(NLOHMANN_HEADER ${CMAKE_SOURCE_DIR}/contrib/nlohmann/includes/nlohmann/json.hpp)
 set(CLI11_HEADER ${CMAKE_SOURCE_DIR}/contrib/cli11/include/cli11/CLI11.hpp)
+set(CATCH_HEADER ${CMAKE_SOURCE_DIR}/contrib/catch/include/catch2/catch.hpp)
 add_executable(Server ${FILES} ${NLOHMANN_HEADER} ${CLI11_HEADER})
 
 target_link_libraries(Server ${Boost_LIBRARIES} libpqxx log4cplus)
