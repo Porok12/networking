@@ -92,9 +92,6 @@ jobs:
       - name: Install 7Zip PowerShell Module
         shell: powershell
         run: Install-Module 7Zip4PowerShell -Force -Verbose
-#       - name: Install Boost0
-#         shell: powershell
-#         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
 #       - name: Install Boost1
 #         shell: powershell
 #         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
@@ -108,7 +105,7 @@ jobs:
         shell: powershell
         run: |
           cd C:\boost
-          cmd.exe /c "C:\boost\bootstrap.bat"
+          cmd.exe /c "C:\boost\bootstrap"
       - name: Hua2
         shell: powershell
         run: .\b2
