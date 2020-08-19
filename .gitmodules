@@ -10,3 +10,6 @@
 [submodule "contrib/libpqxx"]
 	path = contrib/libpqxx
 	url = https://github.com/jtv/libpqxx.git
+[submodule "contrib/log4cplus"]
+	path = contrib/log4cplus
+	url = https://github.com/log4cplus/log4cplus.git
