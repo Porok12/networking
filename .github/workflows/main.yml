@@ -19,6 +19,15 @@ jobs:
       run: |
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
+        echo ${{ github.repository }}
+        echo ${{ githyb.actor }}
+        echo ${{ github.ref#refs/ }}
+        echo ${{ github.ref#refs/*/ }}
+        echo ${{ github.ref }}
+        echo ${{ github.action }}
+        echo ${{ github.workflow }}
+        echo ${{ github.event }}
+        echo ${{ toJson(github) }}
     # install dependencies
     - name: update
       run: sudo apt-get update
