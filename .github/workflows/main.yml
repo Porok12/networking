@@ -63,10 +63,10 @@ jobs:
           Automated Release by GitHub Action CI
         draft: false
         prerelease: false
+    - name: touch txt
+      run: touch file.txt
     - name: create zip
-      run: |
-        touch file.txt
-        zip SampleX64.zip file.txt  
+      run: zip ./SampleX64.zip file.txt  
     - name: Upload Release Asset (x64)
       id: upload-release-asset-x64
       uses: actions/upload-release-asset@v1
@@ -74,8 +74,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_my_release.outputs.upload_url }}
-        asset_path: ./SampleX64.ZIP
-        asset_name: SampleX64.ZIP
+        asset_path: ./SampleX64.zip
+        asset_name: SampleX64.zip
         asset_content_type: application/zip
   
   build-windows:
@@ -84,13 +84,24 @@ jobs:
       - name: Install 7Zip PowerShell Module
         shell: powershell
         run: Install-Module 7Zip4PowerShell -Force -Verbose
-      - name: Install Boost1
-        shell: powershell
-        run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
+#       - name: Install Boost0
+#         shell: powershell
+#         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
+#       - name: Install Boost1
+#         shell: powershell
+#         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
       - name: Install Boost2
         shell: powershell
         run: Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
       - uses: actions/checkout@v2
+      - name: Tada
+        run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\boost\
+      - name: Hua
+        run: |
+          cd C:\boost
+          bootstrap.bat
+          .\b2
+
 #       - name: Installing server (windows)
 #         run: |
 #           cd ..
