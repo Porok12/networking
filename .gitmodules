@@ -7,3 +7,6 @@
 [submodule "contrib/json"]
 	path = contrib/json
 	url = https://github.com/nlohmann/json.git
+[submodule "contrib/libpqxx"]
+	path = contrib/libpqxx
+	url = https://github.com/jtv/libpqxx.git
