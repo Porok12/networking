@@ -105,11 +105,13 @@ jobs:
       - name: Tada
         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\boost\
       - name: Hua
-        shell: cmd
+        shell: powershell
         run: |
           cd C:\boost
-          bootstrap.bat
-          .\b2
+          cmd.exe /c "C:\boost\bootstrap.bat"
+      - name: Hua2
+        shell: powershell
+        run: .\b2
 
 #       - name: Installing server (windows)
 #         run: |
