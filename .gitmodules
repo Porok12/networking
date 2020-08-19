@@ -1,0 +1,15 @@
+[submodule "contrib/Catch2"]
+	path = contrib/Catch2
+	url = https://github.com/catchorg/Catch2.git
+[submodule "contrib/CLI11"]
+	path = contrib/CLI11
+	url = https://github.com/CLIUtils/CLI11.git
+[submodule "contrib/json"]
+	path = contrib/json
+	url = https://github.com/nlohmann/json.git
+[submodule "contrib/libpqxx"]
+	path = contrib/libpqxx
+	url = https://github.com/jtv/libpqxx.git
+[submodule "contrib/log4cplus"]
+	path = contrib/log4cplus
+	url = https://github.com/log4cplus/log4cplus.git
