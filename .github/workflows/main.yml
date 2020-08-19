@@ -62,7 +62,11 @@ jobs:
         body: |
           Automated Release by GitHub Action CI
         draft: false
-        prerelease: false      
+        prerelease: false
+    - name: create zip
+      run: |
+        touch file.txt
+        zip SampleX64.zip file.txt  
     - name: Upload Release Asset (x64)
       id: upload-release-asset-x64
       uses: actions/upload-release-asset@v1
@@ -80,9 +84,9 @@ jobs:
       - name: Install 7Zip PowerShell Module
         shell: powershell
         run: Install-Module 7Zip4PowerShell -Force -Verbose
-      - name: Install Boost
+      - name: Install Boost1
         shell: powershell
-        run: Install-Module Expand-Archive
+        run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
       - name: Install Boost2
         shell: powershell
         run: Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
