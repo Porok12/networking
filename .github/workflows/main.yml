@@ -50,11 +50,55 @@ jobs:
     # run tests
     - name: run tests
       run: build/test/Test
+    # Temporary release
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Automated Release by GitHub Action CI
+        draft: false
+        prerelease: true      
+    - name: Upload Release Asset (x64)
+      id: upload-release-asset-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SampleX64.ZIP
+        asset_name: SampleX64.ZIP
+        asset_content_type: application/zip
   
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: test
-        run: echo "test"
+      - name: Install 7Zip PowerShell Module
+        shell: powershell
+        run: Install-Module 7Zip4PowerShell -Force -Verbose      
+      - uses: actions/checkout@v2
+#       - name: Installing server (windows)
+#         run: |
+#           cd ..
+#           git clone https://github.com/Microsoft/vcpkg.git
+#           cd vcpkg
+#           git checkout --force 2020.01
+#           .\bootstrap-vcpkg.bat
+#           .\vcpkg.exe install cppzmq:x64-windows
+
+      - name: Running cmake (windows)
+        run: |
+          cd ${{ github.workspace }}
+          mkdir build
+      - name: cmake build
+        run: cmake -Bbuild -H.
+      - name: cmake make
+        run: cmake --build build/ --target all
+        env:
+         MAKEFLAGS: "-j2"
 
     
