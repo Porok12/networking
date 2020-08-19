@@ -69,6 +69,8 @@ jobs:
           Automated Release by GitHub Action CI
         draft: false
         prerelease: false
+    - name: pwd
+      run: pwd
     - name: touch txt
       run: touch file.txt
     - name: create zip
@@ -105,7 +107,7 @@ jobs:
       - name: Hua
         run: |
           cd C:\boost
-          .\bootstrap.bat
+          cmd.exe /c ".\bootstrap.bat"
           .\b2
 
 #       - name: Installing server (windows)
