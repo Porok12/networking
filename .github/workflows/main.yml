@@ -18,9 +18,9 @@ jobs:
     - name: Test
       run: echo $RELEASE_VERSION
     - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
     # install dependencies
     - name: update
       run: sudo apt-get update
