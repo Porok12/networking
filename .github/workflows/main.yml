@@ -79,7 +79,13 @@ jobs:
     steps:
       - name: Install 7Zip PowerShell Module
         shell: powershell
-        run: Install-Module 7Zip4PowerShell -Force -Verbose      
+        run: Install-Module 7Zip4PowerShell -Force -Verbose
+      - name: Install Boost
+        shell: powershell
+        run: Install-Module Expand-Archive Invoke-WebRequest
+      - name: Install Boost2
+        shell: powershell
+        run: Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
       - uses: actions/checkout@v2
 #       - name: Installing server (windows)
 #         run: |
