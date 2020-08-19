@@ -20,7 +20,7 @@ jobs:
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
         echo ${{ github.repository }}
-        echo ${{ githyb.actor }}
+        echo ${{ github.actor }}
         echo ${{ github.ref#refs/ }}
         echo ${{ github.ref#refs/*/ }}
         echo ${{ github.ref }}
