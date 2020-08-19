@@ -4,3 +4,6 @@
 [submodule "contrib/CLI11"]
 	path = contrib/CLI11
 	url = https://github.com/CLIUtils/CLI11.git
+[submodule "contrib/json"]
+	path = contrib/json
+	url = https://github.com/nlohmann/json.git
