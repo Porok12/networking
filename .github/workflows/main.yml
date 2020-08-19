@@ -69,7 +69,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ steps.create_my_release.outputs.upload_url }}
         asset_path: ./SampleX64.ZIP
         asset_name: SampleX64.ZIP
         asset_content_type: application/zip
@@ -82,7 +82,7 @@ jobs:
         run: Install-Module 7Zip4PowerShell -Force -Verbose
       - name: Install Boost
         shell: powershell
-        run: Install-Module Expand-Archive Invoke-WebRequest
+        run: Install-Module Expand-Archive
       - name: Install Boost2
         shell: powershell
         run: Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
