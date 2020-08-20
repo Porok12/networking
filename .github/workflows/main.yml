@@ -123,6 +123,9 @@ jobs:
         run: |
           pwd
           g++ -v
+          Get-ChildItem C:\
+          Get-ChildItem C:\boost\
+          Get-ChildItem C:\boost\build\
       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
       # b2 install --prefix="C:\Program Files\boost-build"
       # bootstrap.bat mingw
@@ -162,7 +165,7 @@ jobs:
           cd C:\boost\boost_1_74_0\tools\build\
           .\b2 --show-libraries
           .\b2 install --prefix=C:\boost\build\ toolset=gcc
-          $env:Path += ";C:\boost\build\"   
+          $env:Path += ";C:\boost\build\bin"   
           pwd
           cd C:\boost\build
           pwd
