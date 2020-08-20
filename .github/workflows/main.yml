@@ -162,7 +162,7 @@ jobs:
           cd C:\boost\boost_1_74_0\tools\build\
           .\b2 --show-libraries
           .\b2 install --prefix=C:\boost\build\ toolset=gcc
-          set PATH=%PATH%;C:\boost\build\
+          $env:Path += ";C:\boost\build\"   
           pwd
           cd C:\boost\build
           pwd
