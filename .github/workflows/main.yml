@@ -25,15 +25,16 @@ jobs:
       run: |
         sudo apt install nodejs
         node --version
-        npm --version 
+        npm --version
+        pwd
     - name: Tagging
       uses: butlerlogic/action-autotag@stable
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
-        root: "/CMakeLists.txt"
+        root: "CMakeLists.txt"
         regex_pattern: "VERSION ([0-9\\.])"
         tag_prefix: "server-v"
         tag_suffix: "-alpha"
