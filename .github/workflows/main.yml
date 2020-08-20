@@ -27,6 +27,8 @@ jobs:
         node --version
         npm --version
         pwd
+    - name: HEAD
+      run: head -10 CMakeLists.txt
     - name: Tagging
       uses: butlerlogic/action-autotag@stable
       env:
@@ -35,14 +37,16 @@ jobs:
 #         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
         root: "CMakeLists.txt"
-        regex_pattern: "(?:VERSION )(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
+        regex_pattern: "(?:VERSION )([0-9\\.]{5})([-\\+][\\w\\.0-9]+)?" #"(?:VERSION )(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
         tag_prefix: "server-v"
         tag_suffix: "-alpha"
         tag_message: "Tag message"
     - name: print
       env:
           OUTPUT_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$OUTPUT_CONTEXT"
+      run: |
+        echo "$OUTPUT_CONTEXT"
+        echo "${{ toJson(steps) }}"
     # install dependencies
     - name: update
       run: sudo apt-get update
