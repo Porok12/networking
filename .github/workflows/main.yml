@@ -28,8 +28,10 @@ jobs:
         npm --version 
     - name: Tagging
       uses: butlerlogic/action-autotag@stable
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        GUTHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
         root: "/CMakeLists.txt"
         regex_pattern: "VERSION ([0-9\\.])"
