@@ -168,8 +168,8 @@ jobs:
           Get-ChildItem
           pwd
           $env:Path += ";C:\boost\build\bin"
-          $env:BOOST_INCLUDEDIR = 'C:\boost\build\include'
-          $env:BOOST_LIBRARYDIR = 'C:\boost\build\lib'
+          $env:BOOST_INCLUDEDIR = 'C:\boost\build\'
+          $env:BOOST_LIBRARYDIR = 'C:\boost\build\bin'
           $env:BOOST_ROOT = 'C:\boost\build'
           Set-Location Env:
           Get-ChildItem
