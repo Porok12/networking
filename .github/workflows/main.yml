@@ -170,7 +170,7 @@ jobs:
           cd C:\boost-build\bin
           Get-ChildItem
           cd C:\install\boost_1_55_0
-          C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_55_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
+          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_55_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
           pwd
           
           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
