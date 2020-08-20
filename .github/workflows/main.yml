@@ -138,7 +138,7 @@ jobs:
       - name: Install Boost2
         shell: powershell
         run: |
-          $uri = 'https://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.zip'
+          $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
           Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
 #          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
@@ -158,19 +158,19 @@ jobs:
         shell: powershell
         run: |
           pwd
-          cd C:\install\boost_1_55_0\tools\build\v2
+          cd C:\install\boost_1_68_0\tools\build
           .\bootstrap.bat gcc
       - name: Hua2
         shell: powershell
         run: |
           pwd
-          cd C:\install\boost_1_55_0\tools\build\v2
+          cd C:\install\boost_1_68_0\tools\build
           .\b2 install --prefix="C:\boost-build" toolset=gcc
           $env:Path += ";C:\boost-build\bin"
           cd C:\boost-build\bin
           Get-ChildItem
-          cd C:\install\boost_1_55_0
-          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_55_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
+          cd C:\install\boost_1_68_0
+          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
           pwd
           
           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
