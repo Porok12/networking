@@ -30,6 +30,7 @@ jobs:
     - name: HEAD
       run: head -10 CMakeLists.txt
     - name: Tagging
+      id: version
       uses: butlerlogic/action-autotag@stable
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +47,7 @@ jobs:
           OUTPUT_CONTEXT: ${{ toJson(steps) }}
       run: |
         echo "$OUTPUT_CONTEXT"
-        echo "${{ toJson(steps) }}"
+        echo "${{ toJson(steps.version.outputs) }}"
     # install dependencies
     - name: update
       run: sudo apt-get update
