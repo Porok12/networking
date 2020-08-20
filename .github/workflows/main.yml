@@ -119,6 +119,8 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
+      - name: g++
+        run: g++ -v
       - name: Install 7Zip PowerShell Module
         shell: powershell
         run: Install-Module 7Zip4PowerShell -Force -Verbose
@@ -132,18 +134,18 @@ jobs:
       - name: Tada
         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\boost\
       - name: Hu
-        shell: cmd
-        run: cd C:\boost
+        shell: powershell
+        run: cd C:\boost\boost_1_74_0\
 #       - name: Hua0
 #         shell: cmd
 #         run: |
 #           CMD /c bootstrap
       - name: Hua
-        shell: cmd
-        run: call bootstrap
+        shell: powershell
+        run: .\bootstrap.bat mingw
       - name: Hua2
         shell: powershell
-        run: .\b2
+        run: .\b2 #b2 install --prefix=c:/installation/path toolset=gcc
         
 
 #       - name: Installing server (windows)
