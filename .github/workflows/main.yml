@@ -27,7 +27,7 @@ jobs:
         GUTHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
         root: "/CMakeLists.txt"
-        regex_pattern: "VERSION ([0-9\.])"
+        regex_pattern: "VERSION ([0-9\\.])"
         tag_prefix: "server-v"
         tag_suffix: "-alpha"
         tag_message: "Tag message"
