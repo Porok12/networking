@@ -140,14 +140,18 @@ jobs:
         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\boost\
       - name: Hu
         shell: powershell
-        run: cd C:\boost\boost_1_74_0\
+        run: |
+            cd C:\boost\boost_1_74_0\tools\build\
+            echo %cd%
 #       - name: Hua0
 #         shell: cmd
 #         run: |
 #           CMD /c bootstrap
       - name: Hua
         shell: powershell
-        run: .\bootstrap.bat mingw
+        run: |
+          echo %cd%
+          .\bootstrap.bat gcc
       - name: Hua2
         shell: powershell
         run: .\b2 #b2 install --prefix=c:/installation/path toolset=gcc
