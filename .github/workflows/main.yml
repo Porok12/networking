@@ -89,13 +89,13 @@ jobs:
     - name: Create My Release
       id: create_my_release
       uses: actions/create-release@latest
+      if: ${{ steps.version.outputs.tagcreated }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Automated Release by GitHub Action CI
+        tag_name: "${{ steps.version.outputs.tagname }}"
+        release_name: "Server release v${{ steps.version.outputs.version }}-alpha"
+        body: "Automated Release by GitHub Action CI - ${{ steps.version.outputs.tagmessage }}"
         draft: false
         prerelease: false
     - name: pwd
