@@ -27,7 +27,7 @@ jobs:
         node --version
         npm --version 
     - name: Tagging
-      uses: butlerlogic/action-autotag@1.0.0
+      uses: butlerlogic/action-autotag@stable
       with:
         GUTHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
