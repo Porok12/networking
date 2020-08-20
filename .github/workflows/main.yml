@@ -41,7 +41,7 @@ jobs:
         tag_message: "Tag message"
     - name: print
       env:
-          OUTPUT_CONTEXT: ${{ toJson(steps.previous_step.outputs) }}
+          OUTPUT_CONTEXT: ${{ toJson(steps) }}
       run: echo "$OUTPUT_CONTEXT"
     # install dependencies
     - name: update
