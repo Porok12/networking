@@ -121,7 +121,7 @@ jobs:
     steps:
       - name: g++
         run: |
-          cd
+          pwd
           g++ -v
       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
       # b2 install --prefix="C:\Program Files\boost-build"
@@ -143,8 +143,8 @@ jobs:
       - name: Hu
         shell: powershell
         run: |
-            cd C:\boost\boost_1_74_0\tools\build\
-            cd
+          cd C:\boost\boost_1_74_0\tools\build\
+          pwd
 #       - name: Hua0
 #         shell: cmd
 #         run: |
@@ -152,7 +152,7 @@ jobs:
       - name: Hua
         shell: powershell
         run: |
-          cd
+          pwd
           .\bootstrap.bat gcc
       - name: Hua2
         shell: powershell
