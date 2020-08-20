@@ -120,7 +120,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: g++
-        run: g++ -v
+        run: |
+          cd
+          g++ -v
       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
       # b2 install --prefix="C:\Program Files\boost-build"
       # bootstrap.bat mingw
@@ -142,7 +144,7 @@ jobs:
         shell: powershell
         run: |
             cd C:\boost\boost_1_74_0\tools\build\
-            echo %cd%
+            cd
 #       - name: Hua0
 #         shell: cmd
 #         run: |
@@ -150,7 +152,7 @@ jobs:
       - name: Hua
         shell: powershell
         run: |
-          echo %cd%
+          cd
           .\bootstrap.bat gcc
       - name: Hua2
         shell: powershell
