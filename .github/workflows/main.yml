@@ -21,6 +21,20 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
+    - name: Tag
+    - uses: butlerlogic/action-autotag@1.0.0
+      with:
+        GUTHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        strategy: regex
+        root: "/CMakeLists.txt"
+        regex_pattern: "VERSION ([0-9\.])"
+        tag_prefix: "server-v"
+        tag_suffix: "-alpha"
+        tag_message: "Tag message"
+    - name: print
+      env:
+          OUTPUT_CONTEXT: ${{ toJson(steps.previous_step.outputs) }}
+      run: echo "$OUTPUT_CONTEXT"
     # install dependencies
     - name: update
       run: sudo apt-get update
@@ -106,14 +120,13 @@ jobs:
       - name: Hu
         shell: cmd
         run: cd C:\boost
-      - name: Hua0
-        shell: cmd
-        run: |
-          CMD /c bootstrap
+#       - name: Hua0
+#         shell: cmd
+#         run: |
+#           CMD /c bootstrap
       - name: Hua
         shell: cmd
-        run: |
-          call bootstrap
+        run: call bootstrap
       - name: Hua2
         shell: powershell
         run: .\b2
