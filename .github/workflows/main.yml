@@ -160,8 +160,18 @@ jobs:
         run: |
           pwd
           cd C:\boost\boost_1_74_0\tools\build\
-          .\b2 #b2 install --prefix=c:/installation/path toolset=gcc
-        
+          .\b2 --show-libraries
+          .\b2 install --prefix=C:\boost\build\ toolset=gcc
+          set PATH=%PATH%;C:\boost\build\
+          pwd
+          cd C:\boost\build
+          pwd
+          ls
+      # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
+      # b2 install --prefix="C:\Program Files\boost-build"
+      # bootstrap.bat mingw
+      # bootstrap gcc ; b2 toolset=gcc regex ; b2 --show-libraries 
+      # set PATH=%PATH%;C:\your\path\here\
 
 #       - name: Installing server (windows)
 #         run: |
