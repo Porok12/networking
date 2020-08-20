@@ -31,7 +31,7 @@ jobs:
       uses: butlerlogic/action-autotag@stable
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       with:
+      with:
 #         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         strategy: regex
         root: "CMakeLists.txt"
