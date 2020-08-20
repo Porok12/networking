@@ -76,7 +76,7 @@ jobs:
     - name: touch txt
       run: touch file.txt
     - name: create zip
-      run: zip ./SampleX64.zip file.txt ./build/test/Test
+      run: zip --junk-paths ./SampleX64.zip file.txt ./build/test/Test
     - name: Upload Release Asset (x64)
       id: upload-release-asset-x64
       uses: actions/upload-release-asset@v1
