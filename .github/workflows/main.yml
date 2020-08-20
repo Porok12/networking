@@ -195,5 +195,7 @@ jobs:
           cd build
           cmake ..
           make
+      - name: create archive
+        run: Compress-Archive -Path .\build\test\*.* -DestinationPath .\server-windows-v0.0.0-alpha.zip
 
     
