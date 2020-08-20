@@ -21,6 +21,11 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
+    - name: checking
+      run: |
+        sudo apt install nodejs
+        node --version
+        npm --version 
     - name: Tagging
       uses: butlerlogic/action-autotag@1.0.0
       with:
