@@ -140,11 +140,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Tada
         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\boost\
-      - name: Hu
-        shell: powershell
-        run: |
-          cd C:\boost\boost_1_74_0\tools\build\
-          pwd
+#       - name: Hu
+#         shell: powershell
+#         run: |
+#           cd C:\boost\boost_1_74_0\tools\build\
+#           pwd
 #       - name: Hua0
 #         shell: cmd
 #         run: |
@@ -153,10 +153,14 @@ jobs:
         shell: powershell
         run: |
           pwd
+          cd C:\boost\boost_1_74_0\tools\build\
           .\bootstrap.bat gcc
       - name: Hua2
         shell: powershell
-        run: .\b2 #b2 install --prefix=c:/installation/path toolset=gcc
+        run: |
+          pwd
+          cd C:\boost\boost_1_74_0\tools\build\
+          .\b2 #b2 install --prefix=c:/installation/path toolset=gcc
         
 
 #       - name: Installing server (windows)
