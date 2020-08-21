@@ -120,10 +120,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+#       - name: Install vcpkg
+#         run: |
+#           cd c:\
+#           git clone https://github.com/microsoft/vcpkg
+#           .\vcpkg\bootstrap-vcpkg.bat
       - name: Install conan
         run: |
           pip install conan
           conan
+          conan -v
+          pip -v
       - name: Conan install boost
         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
 #       - name: g++
