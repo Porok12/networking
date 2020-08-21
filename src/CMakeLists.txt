@@ -8,6 +8,10 @@ set(FILES
 #find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
 #target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
 
+message("${BOOST_ROOT}")
+message("${BOOST_LIBRARYDIR}")
+message("${BOOST_INCLUDEDIR}")
+
 set(Boost_USE_STATIC_LIBS   OFF)
 find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
 
