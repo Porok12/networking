@@ -183,6 +183,7 @@ jobs:
         run: |
           pwd
           cd C:\install\boost_1_68_0\tools\build
+          Get-ChildItem
           .\bootstrap.bat gcc
       - name: Install Boost
         shell: powershell
@@ -193,7 +194,6 @@ jobs:
           .\b2 install --prefix="C:\boost-build" toolset=gcc
           $env:Path += ";C:\boost-build\bin"
           cd C:\install\boost_1_68_0
-          Get-ChildItem
           & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --prefix="C:\boost" toolset=gcc install
           pwd
 #          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
