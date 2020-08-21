@@ -194,6 +194,10 @@ jobs:
           Get-ChildItem
           cd C:\ProgramData\chocolatey
           Get-ChildItem
+          cd C:\ProgramData\chocolatey\bin
+          Get-ChildItem
+          cd C:\ProgramData\chocolatey\lib
+          Get-ChildItem
       - name: Running cmake (windows)
         run: |
           mkdir build
