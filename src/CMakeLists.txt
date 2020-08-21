@@ -11,6 +11,10 @@ set(FILES
 set(Boost_USE_STATIC_LIBS   OFF)
 find_package(Boost COMPONENTS program_options serialization system REQUIRED)
 
+message(">${Boost_FOUND}")
+message(">${Boost_INCLUDE_DIR}")
+message(">${Boost_LIBRARIES}")
+
 include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(Server ${FILES})
