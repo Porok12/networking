@@ -193,7 +193,7 @@ jobs:
           .\b2 install --prefix="C:\boost-build" toolset=gcc
           $env:Path += ";C:\boost-build\bin"
           cd C:\install\boost_1_68_0
-          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-libraries=system,program_options,serialization,test --build-type=complete -j 2 --prefix="C:\boost" toolset=gcc install
+          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --prefix="C:\boost" toolset=gcc install
           pwd
 #          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
 #          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
