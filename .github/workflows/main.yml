@@ -216,11 +216,13 @@ jobs:
 #           Get-ChildItem
       - name: Conan build
         run: |
-          mkdir build
-          cd .\build
+          pwd
+          mkdir conan-build
+          cd .\conan-build
           conan install ..
       - name: Running cmake (windows)
         run: |
+          pwd
           mkdir build
           cd build
           cmake -G "MinGW Makefiles" ..
