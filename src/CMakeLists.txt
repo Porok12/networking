@@ -10,7 +10,7 @@ set(FILES
 
 set(BOOST_INCLUDEDIR "C:\boost\include")
 set(BOOST_LIBRARYDIR "C:\boost\lib")
-set(BOOST_ROOT C:\boost)
+set(BOOST_ROOT "C:\boost")
 
 message("${BOOST_ROOT}")
 message("${BOOST_LIBRARYDIR}")
