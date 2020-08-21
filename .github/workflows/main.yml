@@ -187,10 +187,13 @@ jobs:
 #           $env:BOOST_ROOT = 'C:\boost'
 #           Set-Location Env:
 #           Get-ChildItem
-      - name: Running cmake (windows)
+      - name: test
         run: |
           cd ${{ github.workspace }}
           Get-ChildItem
+      - name: Running cmake (windows)
+        run: |
+          cd ${{ github.workspace }}
           mkdir build
           cd build
           cmake -G "MinGW Makefiles" ..
