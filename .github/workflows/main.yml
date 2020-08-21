@@ -190,6 +190,7 @@ jobs:
       - name: Running cmake (windows)
         run: |
           cd ${{ github.workspace }}
+          Get-ChildItem
           mkdir build
           cd build
           cmake -G "MinGW Makefiles" ..
