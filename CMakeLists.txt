@@ -1,3 +1,5 @@
+set(CMAKE_POLICY_DEFAULT_CMP0074 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0092 NEW)
 cmake_minimum_required(VERSION 3.1)
 project(Server VERSION 0.0.0)
 
