@@ -120,6 +120,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install conan
+        run: |
+          pip install conan
+          conan
 #       - name: g++
 #         run: |
 #           pwd
