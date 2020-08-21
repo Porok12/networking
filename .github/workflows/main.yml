@@ -143,7 +143,7 @@ jobs:
 #         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
       - name: Choco install Boost
         shell: powershell
-        run: choco install -y boost-msvc-12
+        run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
         
 #       - name: Install Boost2
 #         shell: powershell
