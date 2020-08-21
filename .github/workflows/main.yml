@@ -138,23 +138,23 @@ jobs:
         run: |
           Start-Process powershell -Verb runAs
           Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#       - name: Install Boost1
+#       - name: Download Boost
 #         shell: powershell
 #         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
-      - name: Choco install Boost
-        shell: powershell
-        run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
-        
-#       - name: Install Boost2
+#       - name: Choco install Boost
 #         shell: powershell
-#         run: |
-#           $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
-#           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-#           Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-# #          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
-# #      - uses: actions/checkout@v2
-#       - name: Tada
-#         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
+#         run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
+        
+      - name: Download Boost
+        shell: powershell
+        run: |
+          $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+          Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
+#          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
+#      - uses: actions/checkout@v2
+      - name: Unzip boost
+        run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
 # #       - name: Hu
 # #         shell: powershell
 # #         run: |
@@ -164,42 +164,42 @@ jobs:
 # #         shell: cmd
 # #         run: |
 # #           CMD /c bootstrap
-#       - name: Hua
-#         shell: powershell
-#         run: |
-#           pwd
-#           cd C:\install\boost_1_68_0\tools\build
-#           .\bootstrap.bat gcc
-#       - name: Hua2
-#         shell: powershell
-#         run: |
-#           pwd
-#           cd C:\install\boost_1_68_0\tools\build
-#           .\b2 install --prefix="C:\boost-build" toolset=gcc
-#           $env:Path += ";C:\boost-build\bin"
-#           cd C:\boost-build\bin
-#           Get-ChildItem
-#           cd C:\install\boost_1_68_0
-#           & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
-#           pwd
-          
-#           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
-#           $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
-#           $env:BOOST_ROOT = 'C:\boost'
-#           Set-Location Env:
-#           Get-ChildItem
-      - name: test
+      - name: Run bootstrap
+        shell: powershell
         run: |
-          cd ${{ github.workspace }}
+          pwd
+          cd C:\install\boost_1_68_0\tools\build
+          .\bootstrap.bat gcc
+      - name: Install Boost
+        shell: powershell
+        run: |
+          pwd
+          cd C:\install\boost_1_68_0\tools\build
+          .\b2 install --prefix="C:\boost-build" toolset=gcc
+          $env:Path += ";C:\boost-build\bin"
+          cd C:\boost-build\bin
           Get-ChildItem
-          cd C:\ProgramData\chocolatey
+          cd C:\install\boost_1_68_0
+          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
+          pwd
+          
+          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
+          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
+          $env:BOOST_ROOT = 'C:\boost'
+          Set-Location Env:
           Get-ChildItem
-          cd C:\ProgramData\chocolatey\bin
-          Get-ChildItem
-          cd C:\ProgramData\chocolatey\lib
-          Get-ChildItem
-          cd C:\ProgramData\chocolatey\lib\boost-msvc-12
-          Get-ChildItem
+#       - name: Test Chocolatey
+#         run: |
+#           cd ${{ github.workspace }}
+#           Get-ChildItem
+#           cd C:\ProgramData\chocolatey
+#           Get-ChildItem
+#           cd C:\ProgramData\chocolatey\bin
+#           Get-ChildItem
+#           cd C:\ProgramData\chocolatey\lib
+#           Get-ChildItem
+#           cd C:\ProgramData\chocolatey\lib\boost-msvc-12
+#           Get-ChildItem
       - name: Running cmake (windows)
         run: |
           mkdir build
