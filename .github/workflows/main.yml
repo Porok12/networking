@@ -220,7 +220,9 @@ jobs:
         if: success() || failure()
 #         continue-on-error: true
         run: |
-          pwd
+          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
+          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
+          $env:BOOST_ROOT = 'C:\boost'
           mkdir build
           cd build
           cmake -G "MinGW Makefiles" ..
