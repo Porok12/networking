@@ -182,15 +182,16 @@ jobs:
         shell: powershell
         run: |
           pwd
-          cd C:\install\boost_1_68_0
+          cd C:\install\boost_1_68_0\tools\build\
           .\bootstrap.bat gcc
       - name: Install Boost
         shell: powershell
         run: |
-          cd C:\install\boost_1_68_0
-          .\b2 install --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --prefix="C:\boost" toolset=gcc install
+          cd C:\install\boost_1_68_0\tools\build\
+          .\b2 --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --prefix="C:\boost-build" toolset=gcc install
           $env:Path += ";C:\boost-build\bin"
-          cd C:\install\boost_1_68_0
+          C:\cd C:\install\boost_1_68_0
+          C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --build-type=complete --prefix="C:\boost" toolset=gcc install
           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
           $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
           $env:BOOST_ROOT = 'C:\boost'
