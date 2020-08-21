@@ -192,6 +192,8 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           Get-ChildItem
+          cd C:\ProgramData\chocolatey
+          Get-ChildItem
       - name: Running cmake (windows)
         run: |
           mkdir build
