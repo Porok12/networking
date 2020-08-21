@@ -9,7 +9,7 @@ set(FILES
 #target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
 
 set(Boost_USE_STATIC_LIBS   OFF)
-find_package(Boost COMPONENTS program_options serialization system REQUIRED)
+find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
 
 message(">${Boost_FOUND}")
 message(">${Boost_INCLUDE_DIR}")
