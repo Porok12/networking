@@ -133,8 +133,8 @@ jobs:
           pip -V
           conan search boost*
           conan inspect boost/1.69.0@conan/stable
-      - name: Conan install boost
-        run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
+#       - name: Conan install boost
+#         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
 #       - name: g++
 #         run: |
 #           pwd
@@ -214,6 +214,11 @@ jobs:
 #           Get-ChildItem
 #           cd C:\ProgramData\chocolatey\lib\boost-msvc-12
 #           Get-ChildItem
+      - name: Conan build
+        run: |
+          mkdir build
+          cd .\build
+          conan install ..
       - name: Running cmake (windows)
         run: |
           mkdir build
