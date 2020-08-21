@@ -130,7 +130,9 @@ jobs:
           pip install conan
           conan
           conan -v
-          pip -v
+          pip -V
+          conan search boost*
+          conan inspect boost/1.69.0@conan/stable
       - name: Conan install boost
         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
 #       - name: g++
