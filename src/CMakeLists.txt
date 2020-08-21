@@ -8,9 +8,9 @@ set(FILES
 #find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
 #target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
 
-set(BOOST_INCLUDEDIR "C:\boost\include")
-set(BOOST_LIBRARYDIR "C:\boost\lib")
-set(BOOST_ROOT "C:\boost")
+set(BOOST_INCLUDEDIR "C:\\boost\\include")
+set(BOOST_LIBRARYDIR "C:\\boost\\lib")
+set(BOOST_ROOT "C:\\boost")
 
 message("${BOOST_ROOT}")
 message("${BOOST_LIBRARYDIR}")
