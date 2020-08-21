@@ -3,7 +3,7 @@ set(FILES
     udp_server.cpp udp_server.h
     )
 
-include(${CMAKE_BINARY_DIR}/conan-build/conanbuildinfo.cmake)
+include(${CMAKE_SOURCE_DIR}/conan-build/conanbuildinfo.cmake)
 conan_basic_setup()
 #find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
 #target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
