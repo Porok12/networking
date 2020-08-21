@@ -124,6 +124,8 @@ jobs:
         run: |
           pip install conan
           conan
+      - name: Conan install boost
+        run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
 #       - name: g++
 #         run: |
 #           pwd
@@ -148,17 +150,16 @@ jobs:
 #       - name: Choco install Boost
 #         shell: powershell
 #         run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
-        
-      - name: Download Boost
-        shell: powershell
-        run: |
-          $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
-          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-          Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-#          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
-#      - uses: actions/checkout@v2
-      - name: Unzip boost
-        run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
+#       - name: Download Boost
+#         shell: powershell
+#         run: |
+#           $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
+#           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+#           Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
+# #          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
+# #      - uses: actions/checkout@v2
+#       - name: Unzip boost
+#         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
 # #       - name: Hu
 # #         shell: powershell
 # #         run: |
@@ -168,30 +169,30 @@ jobs:
 # #         shell: cmd
 # #         run: |
 # #           CMD /c bootstrap
-      - name: Run bootstrap
-        shell: powershell
-        run: |
-          pwd
-          cd C:\install\boost_1_68_0\tools\build
-          .\bootstrap.bat gcc
-      - name: Install Boost
-        shell: powershell
-        run: |
-          pwd
-          cd C:\install\boost_1_68_0\tools\build
-          .\b2 install --prefix="C:\boost-build" toolset=gcc
-          $env:Path += ";C:\boost-build\bin"
-          cd C:\boost-build\bin
-          Get-ChildItem
-          cd C:\install\boost_1_68_0
-          & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
-          pwd
+#       - name: Run bootstrap
+#         shell: powershell
+#         run: |
+#           pwd
+#           cd C:\install\boost_1_68_0\tools\build
+#           .\bootstrap.bat gcc
+#       - name: Install Boost
+#         shell: powershell
+#         run: |
+#           pwd
+#           cd C:\install\boost_1_68_0\tools\build
+#           .\b2 install --prefix="C:\boost-build" toolset=gcc
+#           $env:Path += ";C:\boost-build\bin"
+#           cd C:\boost-build\bin
+#           Get-ChildItem
+#           cd C:\install\boost_1_68_0
+#           & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
+#           pwd
           
-          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
-          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
-          $env:BOOST_ROOT = 'C:\boost'
-          Set-Location Env:
-          Get-ChildItem
+#           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
+#           $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
+#           $env:BOOST_ROOT = 'C:\boost'
+#           Set-Location Env:
+#           Get-ChildItem
 #       - name: Test Chocolatey
 #         run: |
 #           cd ${{ github.workspace }}
