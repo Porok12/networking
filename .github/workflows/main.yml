@@ -198,6 +198,8 @@ jobs:
           Get-ChildItem
           cd C:\ProgramData\chocolatey\lib
           Get-ChildItem
+          cd C:\ProgramData\chocolatey\lib\boost-msvc-12
+          Get-ChildItem
       - name: Running cmake (windows)
         run: |
           mkdir build
