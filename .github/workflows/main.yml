@@ -216,16 +216,16 @@ jobs:
 #           Get-ChildItem
       - name: Conan build
         run: |
-          pwd
           mkdir conan-build
-          cd .\conan-build
+          cd conan-build
           conan install ..
+          Get-ChildItem
       - name: Running cmake (windows)
         run: |
           pwd
           mkdir build
           cd build
-          cmake -G "MinGW Makefiles" ..
+          cmake ..
           make
       - name: create archive
         run: Compress-Archive -Path .\build\test\*.* -DestinationPath .\server-windows-v0.0.0-alpha.zip
