@@ -119,30 +119,31 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: g++
-        run: |
-          pwd
-          g++ -v
-      #    Get-ChildItem C:\
-      # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
-      # b2 install --prefix="C:\Program Files\boost-build"
-      # bootstrap.bat mingw
-      # bootstrap gcc ; b2 toolset=gcc regex ; b2 --show-libraries 
-      # set PATH=%PATH%;C:\your\path\here\
-      - name: Install 7Zip PowerShell Module
-        shell: powershell
-        run: Install-Module 7Zip4PowerShell -Force -Verbose
-      - name: Choco
-        shell: powershell
-        run: |
-          Start-Process powershell -Verb runAs
-          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#       - name: Install Boost1
+#       - name: g++
+#         run: |
+#           pwd
+#           g++ -v
+#       #    Get-ChildItem C:\
+#       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
+#       # b2 install --prefix="C:\Program Files\boost-build"
+#       # bootstrap.bat mingw
+#       # bootstrap gcc ; b2 toolset=gcc regex ; b2 --show-libraries 
+#       # set PATH=%PATH%;C:\your\path\here\
+#       - name: Install 7Zip PowerShell Module
 #         shell: powershell
-#         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
-      - name: Choco install Boost
-        shell: powershell
-        run: choco install -y boost-msvc-12
+#         run: Install-Module 7Zip4PowerShell -Force -Verbose
+#       - name: Choco
+#         shell: powershell
+#         run: |
+#           Start-Process powershell -Verb runAs
+#           Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+# #       - name: Install Boost1
+# #         shell: powershell
+# #         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
+#       - name: Choco install Boost
+#         shell: powershell
+#         run: choco install -y boost-msvc-12
+        
 #       - name: Install Boost2
 #         shell: powershell
 #         run: |
