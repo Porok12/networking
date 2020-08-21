@@ -135,13 +135,16 @@ jobs:
 #           conan inspect boost/1.69.0@conan/stable
 #       - name: Conan install boost
 #         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
-      - name: print out
-        run: |
-          gcc -v
-          g++ -v
-          cmake --version
-          make --version
-          mingw32-make -v
+      - name: print gcc
+        run: gcc -v
+      - name: print g++
+        run: g++ -v
+      - name: print cmake
+        run: cmake --version
+      - name: print make
+        run: make --version
+      - name: print mingw32-make
+        run: mingw32-make -v
 #       #    Get-ChildItem C:\
 #       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
 #       # b2 install --prefix="C:\Program Files\boost-build"
