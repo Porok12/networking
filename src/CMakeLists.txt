@@ -34,6 +34,6 @@ include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(Server ${FILES})
 
-target_link_libraries(Server ${Boost_LIBRARIES} pthread Catch CLI json pqxx_shared) # log4cplus
+target_link_libraries(Server ${Boost_LIBRARIES} pthread Catch CLI json pqxx_shared pqxx_static pqxx) # log4cplus
 
 configure_file(${CMAKE_SOURCE_DIR}/config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
