@@ -22,7 +22,7 @@ if (WIN32)
     set(Boost_ARCHITECTURE "-x64")
 endif (WIN32)
 
-find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
+find_package(Boost 1.60.0 COMPONENTS REQUIRED program_options serialization system)
 
 message("  >${Boost_FOUND}")
 message("  >${Boost_INCLUDE_DIR}")
