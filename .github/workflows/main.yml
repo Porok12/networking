@@ -197,6 +197,7 @@ jobs:
           cd C:\install\boost_1_68_0\tools\build\
           .\bootstrap.bat gcc
       - name: Install Boost
+        continue-on-error: true
         shell: powershell
         run: |
           cd C:\install\boost_1_68_0\tools\build\
