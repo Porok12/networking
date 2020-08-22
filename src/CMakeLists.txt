@@ -25,7 +25,7 @@ set(Boost_USE_STATIC_LIBS   OFF)
 #set (Boost_USE_STATIC_LIBS OFF CACHE BOOL "use static libraries from Boost")
 #set (Boost_USE_MULTITHREADED ON)
 # set(Boost_COMPILER "-x32")
-set(Boost_ARCHITECTURE "-x32")
+set(Boost_ARCHITECTURE "-x64")
 find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
 
 message(">${Boost_FOUND}")
