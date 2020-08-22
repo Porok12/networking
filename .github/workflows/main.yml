@@ -242,7 +242,7 @@ jobs:
           $env:BOOST_ROOT = 'C:\boost'
           mkdir build
           cd build
-          cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
+          cmake -DBOOST_ROOT=c:/boost -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
       - name: Running make (windows)
         if: success() || failure()
         run: |
