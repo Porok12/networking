@@ -84,8 +84,6 @@ install(TARGETS json EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
 #endif()
 
 # libpqxx
-message("Unable to find libpqxx")
-
 execute_process(COMMAND git submodule update --init -- contrib/libpqxx
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
