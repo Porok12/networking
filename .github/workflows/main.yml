@@ -223,6 +223,7 @@ jobs:
 #           conan install ..
 #           Get-ChildItem
       - name: Check libs
+        if: success() || failure()
         run: |
           cd c:\boost\lib
           Get-ChildItem
@@ -238,6 +239,6 @@ jobs:
           cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
           make
       - name: create archive
-        run: Compress-Archive -Path .\build\test\*.* -DestinationPath .\server-windows-v0.0.0-alpha.zip
+        run: Compress-Archive -Path .\build\test\* -DestinationPath .\server-windows-v0.0.0-alpha.zip
 
     
