@@ -150,7 +150,7 @@ jobs:
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
-          choco install --forence -y postgresql12
+          choco install --force -y postgresql12
 #       #    Get-ChildItem C:\
 #       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
 #       # b2 install --prefix="C:\Program Files\boost-build"
