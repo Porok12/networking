@@ -150,7 +150,7 @@ jobs:
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
-          choco install -y postgresql10
+          choco install --forence -y postgresql12
 #       #    Get-ChildItem C:\
 #       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
 #       # b2 install --prefix="C:\Program Files\boost-build"
@@ -243,8 +243,10 @@ jobs:
           mkdir build
           cd build
           cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
+      - name: Running make (windows)
+          cd build
           make
       - name: create archive
-        run: Compress-Archive -Path .\build\test\* -DestinationPath .\server-windows-v0.0.0-alpha.zip
+        run: Compress-Archive -Path .\build\* -DestinationPath .\server-windows-v0.0.0-alpha.zip
 
     
