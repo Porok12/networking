@@ -1,3 +1,5 @@
+set(CMAKE_POLICY_DEFAULT_CMP0074 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0092 NEW)
 cmake_minimum_required(VERSION 3.1)
 project(Server VERSION 0.0.0)
 
@@ -11,91 +13,57 @@ set(INSTALL_DESTINATION bin)
 message(">>>> ${INSTALL_DESTINATION} <<<<")
 message(">>>> ${CMAKE_INSTALL_PREFIX} <<<<")
 
-unset(Catch_INCLUDE_DIR CACHE)
-unset(json_INCLUDE_DIR CACHE)
-unset(CLI_INCLUDE_DIR CACHE)
-unset(libpqxx_INCLUDE_DIR CACHE)
-unset(log4cplus_INCLUDE_DIR CACHE)
-
-
 # Catch2
-find_path(Catch_INCLUDE_DIR ...)
-message(">>>> ${Catch_INCLUDE_DIR} <<<<")
+execute_process(COMMAND git submodule update --init -- contrib/Catch2
+WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-if((NOT Catch_INCLUDE_DIR) OR (NOT EXISTS ${Catch_INCLUDE_DIR}))
-    message("Unable to find Catch2")
+unset(Catch_INCLUDE_DIR CACHE)
+set(Catch_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/Catch2/single_include
+CACHE PATH "Catch2 include directory")
 
-    execute_process(COMMAND git submodule update --init -- contrib/Catch2
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+install(DIRECTORY ${Catch_INCLUDE_DIR}/Catch2 DESTINATION ${INSTALL_DESTINATION})
 
-    unset(Catch_INCLUDE_DIR CACHE)
-    set(Catch_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/Catch2/single_include
-    CACHE PATH "Catch2 include directory")
+add_library(Catch INTERFACE)
 
-    install(DIRECTORY ${Catch_INCLUDE_DIR}/Catch2 DESTINATION ${INSTALL_DESTINATION})
+target_include_directories(Catch INTERFACE
+    $<BUILD_INTERFACE:${Catch_INCLUDE_DIR}>
+    $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
 
-    add_library(Catch INTERFACE)
-
-    target_include_directories(Catch INTERFACE
-        $<BUILD_INTERFACE:${Catch_INCLUDE_DIR}>
-        $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
-
-    install(TARGETS Catch EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
-else()
-    # see above, setup target as well
-endif()
+install(TARGETS Catch EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
 
 # CLI11
-find_path(CLI_INCLUDE_DIR ...)
-message(">>>> ${CLI_INCLUDE_DIR} <<<<")
+execute_process(COMMAND git submodule update --init -- contrib/CLI11
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-if((NOT CLI_INCLUDE_DIR) OR (NOT EXISTS ${CLI_INCLUDE_DIR}))
-    message("Unable to find CLI11")
+unset(CLI_INCLUDE_DIR CACHE)
+set(CLI_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/CLI11/include
+        CACHE PATH "CLI11 include directory")
 
-    execute_process(COMMAND git submodule update --init -- contrib/CLI11
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+install(DIRECTORY ${CLI_INCLUDE_DIR}/CLI11 DESTINATION ${INSTALL_DESTINATION})
 
-    unset(CLI_INCLUDE_DIR CACHE)
-    set(CLI_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/CLI11/include
-            CACHE PATH "CLI11 include directory")
+add_library(CLI INTERFACE)
+target_include_directories(CLI INTERFACE
+        $<BUILD_INTERFACE:${CLI_INCLUDE_DIR}>
+        $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
 
-    install(DIRECTORY ${CLI_INCLUDE_DIR}/CLI11 DESTINATION ${INSTALL_DESTINATION})
-
-    add_library(CLI INTERFACE)
-    target_include_directories(CLI INTERFACE
-            $<BUILD_INTERFACE:${CLI_INCLUDE_DIR}>
-            $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
-
-    install(TARGETS CLI EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
-else()
-    # see above, setup target as well
-endif()
+install(TARGETS CLI EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
 
 # json
-find_path(json_INCLUDE_DIR ...)
-message(">>>> ${json_INCLUDE_DIR} <<<<")
+execute_process(COMMAND git submodule update --init -- contrib/json
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-if((NOT json_INCLUDE_DIR) OR (NOT EXISTS ${json_INCLUDE_DIR}))
-    message("Unable to find json")
+unset(json_INCLUDE_DIR CACHE)
+set(json_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/json/single_include
+        CACHE PATH "json include directory")
 
-    execute_process(COMMAND git submodule update --init -- contrib/json
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+install(DIRECTORY ${json_INCLUDE_DIR}/json DESTINATION ${INSTALL_DESTINATION})
 
-    unset(json_INCLUDE_DIR CACHE)
-    set(json_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib/json/single_include
-            CACHE PATH "json include directory")
+add_library(json INTERFACE)
+target_include_directories(json INTERFACE
+        $<BUILD_INTERFACE:${json_INCLUDE_DIR}>
+        $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
 
-    install(DIRECTORY ${json_INCLUDE_DIR}/json DESTINATION ${INSTALL_DESTINATION})
-
-    add_library(json INTERFACE)
-    target_include_directories(json INTERFACE
-            $<BUILD_INTERFACE:${json_INCLUDE_DIR}>
-            $<INSTALL_INTERFACE:${INSTALL_DESTINATION}>)
-
-    install(TARGETS json EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
-else()
-    # see above, setup target as well
-endif()
+install(TARGETS json EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
 
 ## log4cplus
 #find_path(log4cplus_INCLUDE_DIR ...)
@@ -116,23 +84,14 @@ endif()
 #endif()
 
 # libpqxx
-find_path(libpqxx_INCLUDE_DIR ...)
-find_library(libpqxx_LIBRARY ...)
-message(">>>> ${libpqxx_LIBRARY}  ${libpqxx_INCLUDE_DIR} <<<<")
+execute_process(COMMAND git submodule update --init -- contrib/libpqxx
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-if((NOT libpqxx_LIBRARY) OR (NOT EXISTS ${libpqxx_INCLUDE_DIR}))
-    message("Unable to find libpqxx")
-
-    execute_process(COMMAND git submodule update --init -- contrib/libpqxx
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-    add_subdirectory(contrib/libpqxx)
-    message("${pqxx_shared}")
-else()
-    # see above, setup target as well
-endif()
+add_subdirectory(contrib/libpqxx)
+message("${pqxx_shared}")
 
 # Source directory
+set(BUILD_TEST OFF)
 add_subdirectory (src)
 
 if (SERVER_TESTING)

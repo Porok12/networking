@@ -125,20 +125,32 @@ jobs:
 #           cd c:\
 #           git clone https://github.com/microsoft/vcpkg
 #           .\vcpkg\bootstrap-vcpkg.bat
-      - name: Install conan
-        run: |
-          pip install conan
-          conan
-          conan -v
-          pip -V
-          conan search boost*
-          conan inspect boost/1.69.0@conan/stable
+#       - name: Install conan
+#         run: |
+#           pip install conan
+#           conan
+#           conan -v
+#           pip -V
+#           conan search boost*
+#           conan inspect boost/1.69.0@conan/stable
 #       - name: Conan install boost
 #         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
-#       - name: g++
-#         run: |
-#           pwd
-#           g++ -v
+      - name: print gcc
+        run: gcc -v
+      - name: print g++
+        run: g++ -v
+      - name: print cmake
+        run: cmake --version
+      - name: print make
+        run: make --version
+      - name: print mingw32-make
+        run: mingw32-make -v
+      - name: print choco
+        run: choco -v
+      - name: Install PostgreSQL
+        run: |
+          Start-Process powershell -Verb runAs
+          choco install --force -y postgresql12
 #       #    Get-ChildItem C:\
 #       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
 #       # b2 install --prefix="C:\Program Files\boost-build"
@@ -159,16 +171,16 @@ jobs:
 #       - name: Choco install Boost
 #         shell: powershell
 #         run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
-#       - name: Download Boost
-#         shell: powershell
-#         run: |
-#           $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
-#           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-#           Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-# #          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
-# #      - uses: actions/checkout@v2
-#       - name: Unzip boost
-#         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
+      - name: Download Boost
+        shell: powershell
+        run: |
+          $uri = 'https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip'
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+          Invoke-WebRequest -Uri $uri -OutFile C:\boost.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
+#          Invoke-WebRequest https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip -OutFile C:\boost.zip
+#      - uses: actions/checkout@v2
+      - name: Unzip boost
+        run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
 # #       - name: Hu
 # #         shell: powershell
 # #         run: |
@@ -178,30 +190,26 @@ jobs:
 # #         shell: cmd
 # #         run: |
 # #           CMD /c bootstrap
-#       - name: Run bootstrap
-#         shell: powershell
-#         run: |
-#           pwd
-#           cd C:\install\boost_1_68_0\tools\build
-#           .\bootstrap.bat gcc
-#       - name: Install Boost
-#         shell: powershell
-#         run: |
-#           pwd
-#           cd C:\install\boost_1_68_0\tools\build
-#           .\b2 install --prefix="C:\boost-build" toolset=gcc
-#           $env:Path += ";C:\boost-build\bin"
-#           cd C:\boost-build\bin
-#           Get-ChildItem
-#           cd C:\install\boost_1_68_0
-#           & C:\boost-build\bin\b2.exe --build-dir="C:\install\boost_1_68_0\build" --with-system --with-program_options --with-serialization --with-test --build-type=complete --prefix="C:\boost" toolset=gcc install
-#           pwd
-          
-#           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
-#           $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
-#           $env:BOOST_ROOT = 'C:\boost'
-#           Set-Location Env:
-#           Get-ChildItem
+      - name: Run bootstrap
+        shell: powershell
+        run: |
+          pwd
+          cd C:\install\boost_1_68_0\tools\build\
+          .\bootstrap.bat gcc
+      - name: Install Boost
+        shell: powershell
+        run: |
+          cd C:\install\boost_1_68_0\tools\build\
+          .\b2 --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --prefix="C:\boost-build" toolset=gcc install
+          $env:Path += ";C:\boost-build\bin"
+          cd C:\install\boost_1_68_0
+          C:\boost-build\bin\b2.exe --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --build-dir="C:\install\boost_1_68_0\build" --build-type=complete --prefix="C:\boost" toolset=gcc install
+          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
+          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
+          $env:BOOST_ROOT = 'C:\boost'
+#          Set-Location Env:
+#          Get-ChildItem
+#
 #       - name: Test Chocolatey
 #         run: |
 #           cd ${{ github.workspace }}
@@ -214,20 +222,33 @@ jobs:
 #           Get-ChildItem
 #           cd C:\ProgramData\chocolatey\lib\boost-msvc-12
 #           Get-ChildItem
-      - name: Conan build
+#       - name: Conan build
+#         run: |
+#           mkdir conan-build
+#           cd conan-build
+#           conan install ..
+#           Get-ChildItem
+      - name: Check libs
+        if: success() || failure()
         run: |
-          mkdir conan-build
-          cd conan-build
-          conan install ..
+          cd c:\boost\lib
           Get-ChildItem
       - name: Running cmake (windows)
+        if: success() || failure()
+#         continue-on-error: true
         run: |
-          pwd
+          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
+          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
+          $env:BOOST_ROOT = 'C:\boost'
           mkdir build
           cd build
-          cmake ..
+          cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
+      - name: Running make (windows)
+        if: success() || failure()
+        run: |
+          cd build
           make
       - name: create archive
-        run: Compress-Archive -Path .\build\test\*.* -DestinationPath .\server-windows-v0.0.0-alpha.zip
+        run: Compress-Archive -Path .\build\* -DestinationPath .\server-windows-v0.0.0-alpha.zip
 
     

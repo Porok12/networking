@@ -8,8 +8,27 @@ set(FILES
 #find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
 #target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
 
-set(Boost_USE_STATIC_LIBS   OFF)
-find_package(Boost COMPONENTS program_options serialization system REQUIRED)
+message("+++ ${BOOST_ROOT}")
+message("+++ ${BOOST_INCLUDEDIR}")
+message("+++ ${BOOST_LIBRARYDIR}")
+
+set(Boost_NO_SYSTEM_PATHS TRUE)
+if (Boost_NO_SYSTEM_PATHS)
+  set(BOOST_ROOT "${BOOST_ROOT}")
+  message("+++ ${BOOST_ROOT}")
+  set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
+  message("+++ ${BOOST_INCLUDEDIR}")
+  set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
+  message("+++ ${BOOST_LIBRARYDIR}")
+endif (Boost_NO_SYSTEM_PATHS)
+set(Boost_USE_STATIC_LIBS   ON)
+# set(Boost_COMPILER "-x32")
+set(Boost_ARCHITECTURE "-x32")
+find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
+
+message(">${Boost_FOUND}")
+message(">${Boost_INCLUDE_DIR}")
+message(">${Boost_LIBRARIES}")
 
 include_directories(${Boost_INCLUDE_DIR})
 
