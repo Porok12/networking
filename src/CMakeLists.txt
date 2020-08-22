@@ -22,6 +22,8 @@ if (Boost_NO_SYSTEM_PATHS)
   message("+++ ${BOOST_LIBRARYDIR}")
 endif (Boost_NO_SYSTEM_PATHS)
 set(Boost_USE_STATIC_LIBS   ON)
+# set(Boost_COMPILER "-x32")
+set(Boost_ARCHITECTURE "-x32")
 find_package(Boost 1.68.0 COMPONENTS REQUIRED program_options serialization system)
 
 message(">${Boost_FOUND}")
