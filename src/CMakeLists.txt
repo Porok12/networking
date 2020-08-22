@@ -31,6 +31,11 @@ message(">${Boost_INCLUDE_DIR}")
 message(">${Boost_LIBRARIES}")
 
 include_directories(${Boost_INCLUDE_DIR})
+link_libraries(${Boost_LIBRARIES})
+
+add_definitions( -DBOOST_ALL_NO_LIB )
+add_definitions( -DBOOST_ALL_DYN_LINK )
+
 
 add_executable(Server ${FILES})
 
