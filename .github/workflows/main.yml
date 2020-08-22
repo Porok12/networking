@@ -244,6 +244,7 @@ jobs:
           cd build
           cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
       - name: Running make (windows)
+        run: |
           cd build
           make
       - name: create archive
