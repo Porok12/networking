@@ -222,6 +222,10 @@ jobs:
 #           cd conan-build
 #           conan install ..
 #           Get-ChildItem
+      - name: Check libs
+        run: |
+          cd c:\boost\lib
+          Get-ChildItem
       - name: Running cmake (windows)
         if: success() || failure()
 #         continue-on-error: true
