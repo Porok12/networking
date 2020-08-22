@@ -87,12 +87,12 @@ install(TARGETS json EXPORT my_export_set DESTINATION ${INSTALL_DESTINATION})
 execute_process(COMMAND git submodule update --init -- contrib/libpqxx
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_subdirectory(contrib/libpqxx)
-message("${pqxx_shared}")
-
-# Source directory
 set(SKIP_BUILD_TEST ON)
 set(BUILD_TEST OFF)
+add_subdirectory(contrib/libpqxx)
+message("*** ${pqxx_shared}")
+
+# Source directory
 add_subdirectory (src)
 
 if (SERVER_TESTING)
