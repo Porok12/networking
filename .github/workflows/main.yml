@@ -145,6 +145,12 @@ jobs:
         run: make --version
       - name: print mingw32-make
         run: mingw32-make -v
+      - name: print choco
+        run: choco
+      - name: Install PostgreSQL
+        run: |
+          Start-Process powershell -Verb runAs
+          choco install -y postgresql
 #       #    Get-ChildItem C:\
 #       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
 #       # b2 install --prefix="C:\Program Files\boost-build"
