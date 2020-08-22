@@ -231,7 +231,7 @@ jobs:
           $env:BOOST_ROOT = 'C:\boost'
           mkdir build
           cd build
-          cmake -G "MinGW Makefiles" ..
+          cmake -DBOOST_ROOT=c:/boost -DBoost_USE_STATIC_LIBS=ON -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
           make
       - name: create archive
         run: Compress-Archive -Path .\build\test\*.* -DestinationPath .\server-windows-v0.0.0-alpha.zip
