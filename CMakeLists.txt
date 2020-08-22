@@ -91,6 +91,7 @@ add_subdirectory(contrib/libpqxx)
 message("${pqxx_shared}")
 
 # Source directory
+set(BUILD_TEST OFF)
 add_subdirectory (src)
 
 if (SERVER_TESTING)
