@@ -18,7 +18,8 @@ if (WIN32)
       set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
       message("+++ ${BOOST_LIBRARYDIR}")
     endif (Boost_NO_SYSTEM_PATHS)
-    set(Boost_USE_STATIC_LIBS   OFF)
+    
+    set(Boost_USE_STATIC_LIBS   ON)
     set(Boost_ARCHITECTURE "-x64")
 endif (WIN32)
 
@@ -29,10 +30,6 @@ message("  >${Boost_INCLUDE_DIR}")
 message("  >${Boost_LIBRARIES}")
 
 include_directories(${Boost_INCLUDE_DIR})
-link_libraries(${Boost_LIBRARIES})
-
-add_definitions( -DBOOST_ALL_NO_LIB )
-add_definitions( -DBOOST_ALL_DYN_LINK )
 
 add_executable(Server ${FILES})
 
