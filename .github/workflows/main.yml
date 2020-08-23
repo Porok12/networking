@@ -53,24 +53,6 @@ jobs:
       run: sudo apt-get update
     - name: boost
       run: sudo apt-get install -y libboost-program-options-dev libboost-serialization-dev libboost-system-dev libboost-test-dev
-#     - name: Cache boost
-#       uses: actions/cache@v2
-#       id: cache-boost
-#       with:
-#         path: "~/boost"
-#         key: libboost-all-dev
-#     - name: load cache
-#       if: steps.cache-boost.outputs.cache-hit == 'true'
-#       run: |
-#         sudo cp --force --recursive ~/boost/* /
-#     - name: install cache
-#       if: steps.cache-boost.outputs.cache-hit != 'true'
-#       run: |
-#         sudo apt-get update && sudo apt-get install --yes libboost-all-dev
-#         mkdir -p ~/boost
-#         for dep in libboost-all-dev; do
-#           dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
-#         done
     - name: postgresql
       run: sudo apt-get install --yes --quiet libpq-dev postgresql-server-dev-all # postgresql  
     # build project
@@ -85,7 +67,6 @@ jobs:
     # run tests
     - name: run tests
       run: build/test/Test
-    # Temporary release
     - name: Create My Release
       if: ${{ steps.version.outputs.tagcreated == 'yes' }}
       id: create_my_release
@@ -98,12 +79,8 @@ jobs:
         body: "Automated Release by GitHub Action CI - ${{ steps.version.outputs.tagmessage }}"
         draft: false
         prerelease: false
-    - name: pwd
-      run: pwd
-    - name: touch txt
-      run: touch file.txt
     - name: create zip
-      run: zip --junk-paths ./SampleX64.zip file.txt ./build/test/Test
+      run: zip --junk-paths ./server-linux-v0.0.0-alpha.zip ./build/test/Test
     - name: Upload Release Asset (x64)
       if: ${{ steps.version.outputs.tagcreated == 'yes' }}
       id: upload-release-asset-x64
@@ -112,65 +89,18 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_my_release.outputs.upload_url }}
-        asset_path: ./SampleX64.zip
-        asset_name: SampleX64.zip
+        asset_path: ./server-linux-v0.0.0-alpha.zip
+        asset_name: Linux.zip
         asset_content_type: application/zip
   
   build-windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-#       - name: Install vcpkg
-#         run: |
-#           cd c:\
-#           git clone https://github.com/microsoft/vcpkg
-#           .\vcpkg\bootstrap-vcpkg.bat
-#       - name: Install conan
-#         run: |
-#           pip install conan
-#           conan
-#           conan -v
-#           pip -V
-#           conan search boost*
-#           conan inspect boost/1.69.0@conan/stable
-#       - name: Conan install boost
-#         run: conan install boost/1.69.0@conan/stable --build=boost --build=bzip2 --build=zlib
-      - name: print gcc
-        run: gcc -v
-      - name: print g++
-        run: g++ -v
-      - name: print cmake
-        run: cmake --version
-      - name: print make
-        run: make --version
-      - name: print mingw32-make
-        run: mingw32-make -v
-      - name: print choco
-        run: choco -v
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
           choco install -y postgresql12
-#       #    Get-ChildItem C:\
-#       # b2 --build-dir="C:\Program Files\boost_1_59_0\build" --prefix="C:\Program Files\boost" toolset=gcc install
-#       # b2 install --prefix="C:\Program Files\boost-build"
-#       # bootstrap.bat mingw
-#       # bootstrap gcc ; b2 toolset=gcc regex ; b2 --show-libraries 
-#       # set PATH=%PATH%;C:\your\path\here\
-#       - name: Install 7Zip PowerShell Module
-#         shell: powershell
-#         run: Install-Module 7Zip4PowerShell -Force -Verbose
-#       - name: Choco
-#         shell: powershell
-#         run: |
-#           Start-Process powershell -Verb runAs
-#           Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#       - name: Download Boost
-#         shell: powershell
-#         run: wget "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip" -outfile "boost.zip"
-#       - name: Choco install Boost
-#         shell: powershell
-#         run: choco install --yes --verbose --allow-empty-checksums boost-msvc-12
       - name: Download Boost
         shell: powershell
         run: |
@@ -181,15 +111,6 @@ jobs:
 #      - uses: actions/checkout@v2
       - name: Unzip boost
         run: Expand-Archive -LiteralPath 'C:\boost.zip' -DestinationPath C:\install\
-# #       - name: Hu
-# #         shell: powershell
-# #         run: |
-# #           cd C:\boost\boost_1_74_0\tools\build\
-# #           pwd
-# #       - name: Hua0
-# #         shell: cmd
-# #         run: |
-# #           CMD /c bootstrap
       - name: Run bootstrap
         shell: powershell
         run: |
@@ -205,30 +126,6 @@ jobs:
           $env:Path += ";C:\boost-build\bin"
           cd C:\install\boost_1_68_0
           C:\boost-build\bin\b2.exe --with-system --with-program_options --with-serialization --with-test --build-type=complete -j2 --build-dir="C:\install\boost_1_68_0\build" --build-type=complete --prefix="C:\boost" toolset=gcc install
-          $env:BOOST_INCLUDEDIR = 'C:\boost\include'
-          $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
-          $env:BOOST_ROOT = 'C:\boost'
-#          Set-Location Env:
-#          Get-ChildItem
-#
-#       - name: Test Chocolatey
-#         run: |
-#           cd ${{ github.workspace }}
-#           Get-ChildItem
-#           cd C:\ProgramData\chocolatey
-#           Get-ChildItem
-#           cd C:\ProgramData\chocolatey\bin
-#           Get-ChildItem
-#           cd C:\ProgramData\chocolatey\lib
-#           Get-ChildItem
-#           cd C:\ProgramData\chocolatey\lib\boost-msvc-12
-#           Get-ChildItem
-#       - name: Conan build
-#         run: |
-#           mkdir conan-build
-#           cd conan-build
-#           conan install ..
-#           Get-ChildItem
       - name: Check libs
         if: success() || failure()
         run: |
@@ -236,19 +133,20 @@ jobs:
           Get-ChildItem
       - name: Running cmake (windows)
         if: success() || failure()
-#         continue-on-error: true
         run: |
           $env:BOOST_INCLUDEDIR = 'C:\boost\include'
           $env:BOOST_LIBRARYDIR = 'C:\boost\lib'
           $env:BOOST_ROOT = 'C:\boost'
           mkdir build
           cd build
-          cmake -DBOOST_ROOT=c:/boost -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=c:/boost -DBoost_DEBUG=ON -G "MinGW Makefiles" ..
       - name: Running make (windows)
         if: success() || failure()
         run: |
           cd build
           make
+      - name: Run tests
+        run: .\build\test\Test.exe
       - name: create archive
         if: success() || failure()
         run: Compress-Archive -Path .\build\* -DestinationPath .\server-windows-v0.0.0-alpha.zip
@@ -273,7 +171,7 @@ jobs:
         with:
           upload_url: ${{ steps.my_create_release.outputs.upload_url }}
           asset_path: ./server-windows-v0.0.0-alpha.zip
-          asset_name: server-windows-v0.0.0-alpha.zip
+          asset_name: Windows.zip
           asset_content_type: application/zip
 
     
