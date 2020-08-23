@@ -15,6 +15,7 @@ if (WIN32)
     endif (Boost_NO_SYSTEM_PATHS)
 
     set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
     set(Boost_USE_STATIC_LIBS   ON)
     set(Boost_ARCHITECTURE "-x64")
 endif (WIN32)
