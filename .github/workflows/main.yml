@@ -99,7 +99,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check MinGW libs
         run: |
-          Get-Command gcc
+          C:\ProgramData\Chocolatey
+          Get-ChildItem
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
