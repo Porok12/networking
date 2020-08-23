@@ -99,7 +99,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check MinGW libs
         run: |
-          cd C:\ProgramData\Chocolatey
+          cd C:\ProgramData\Chocolatey\lib
           Get-ChildItem
       - name: Install PostgreSQL
         run: |
