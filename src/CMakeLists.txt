@@ -3,11 +3,6 @@ set(FILES
     udp_server.cpp udp_server.h
     )
 
-#include(${CMAKE_SOURCE_DIR}/conan-build/conanbuildinfo.cmake)
-#conan_basic_setup()
-#find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
-#target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
-
 if (WIN32)
     set(Boost_NO_SYSTEM_PATHS TRUE)
     if (Boost_NO_SYSTEM_PATHS)
@@ -18,7 +13,8 @@ if (WIN32)
       set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
       message("+++ ${BOOST_LIBRARYDIR}")
     endif (Boost_NO_SYSTEM_PATHS)
-    
+
+    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
     set(Boost_USE_STATIC_LIBS   ON)
     set(Boost_ARCHITECTURE "-x64")
 endif (WIN32)
