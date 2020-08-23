@@ -13,9 +13,9 @@ if (WIN32)
       set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
       message("+++ ${BOOST_LIBRARYDIR}")
     endif (Boost_NO_SYSTEM_PATHS)
-
-    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
+    
+    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
     set(Boost_USE_STATIC_LIBS   ON)
     set(Boost_ARCHITECTURE "-x64")
 endif (WIN32)
