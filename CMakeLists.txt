@@ -5,6 +5,7 @@ project(Server VERSION 0.0.0)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 
 option(SERVER_TESTING "Run tests." ON)
 
