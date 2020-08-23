@@ -99,7 +99,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check MinGW libs
         run: |
-          where gcc
+          Get-Command gcc
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
