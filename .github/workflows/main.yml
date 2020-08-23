@@ -97,6 +97,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Check MinGW libs
+        run: |
+          cd c:\MinGW
+          Get-ChildItem
+          echo "------------------------"
+          cd c:\
+          Get-ChildItem
       - name: Install PostgreSQL
         run: |
           Start-Process powershell -Verb runAs
